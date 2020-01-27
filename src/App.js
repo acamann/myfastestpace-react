@@ -1,25 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+import Header from "./components/header.component";
+import PaceChart from "./components/pace-chart.component";
+import RacesList from "./components/races-list.component";
+import EditRace from "./components/edit-race.component";
+import CreateRace from "./components/create-race.component";
+import CreateUser from "./components/create-user.component";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+        <Header />
+        <PaceChart />
+        {/* <RacesList /> */}
+        <Route path="/" exact component={RacesList} />
+        <Route path="/edit/:id" component={EditRace} />
+        <Route path="/create" component={CreateRace} />
+        <Route path="/user" component={CreateUser} />
+    </Router>
   );
 }
 
