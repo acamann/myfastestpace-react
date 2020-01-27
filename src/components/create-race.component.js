@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -28,10 +29,16 @@ export default class CreateRace extends Component {
     }
 
     componentDidMount() {
-        //lifecycle method, right before anything displays
+        axios.get('http://localhost:8000/users')
+            .then(response => {
+                if (response.data.length > 0) {
+                    this.setState({
+                        users: response.data.map(user => user.username),
+                        username: response.data[0].username
+                    })
+                }
+            })
         this.setState({
-            users: ['acamann', 'sarahcamann'],
-            username: 'acamann',
             distanceOptions: [
                 {distanceName: 'five-k', miles: 3.1, displayName: '5K' },
                 {distanceName: 'ten-k', miles: 6.2, displayName: '10K' },
@@ -51,7 +58,7 @@ export default class CreateRace extends Component {
     onChangeDistance(e) {
         const selectedDistance = e.target.options[e.target.options.selectedIndex];
         this.setState({
-            distanceName: selectedDistance.getAttribute('distanceName'),
+            distanceName: selectedDistance.getAttribute('distance-name'),
             distanceMiles: Number(e.target.value)
         });
     }
@@ -96,8 +103,11 @@ export default class CreateRace extends Component {
         }
 
         console.log(race);
+        
+        axios.post('http://localhost:8000/races/add', race)
+            .then(res => console.log(res.data));
 
-        // window.location = '/';
+        window.location = '/';
     }
 
     render() {
@@ -154,7 +164,7 @@ export default class CreateRace extends Component {
                                         return (
                                             <option 
                                                 key={item.distanceName}
-                                                distanceName={item.distanceName}
+                                                distance-name={item.distanceName}
                                                 value={item.miles}>
                                                     {item.displayName}
                                                 </option>
