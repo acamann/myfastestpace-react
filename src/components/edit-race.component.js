@@ -29,7 +29,7 @@ export default class EditRace extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8000/races/' + this.props.match.params.id)
+        axios.get('https://myfastestpace-server.herokuapp.com/races/' + this.props.match.params.id)
             .then(response => {
                 this.setState({
                     date: new Date(response.data.date),
@@ -41,7 +41,7 @@ export default class EditRace extends Component {
                     username: response.data.username
                 })
             })
-        axios.get('http://localhost:8000/users/')
+        axios.get('https://myfastestpace-server.herokuapp.com/users/')
             .then(response => {
                 if (response.data.length > 0) {
                     this.setState({
@@ -115,7 +115,7 @@ export default class EditRace extends Component {
 
         console.log(race);
         
-        axios.post('http://localhost:8000/races/update/' + this.props.match.params.id, race)
+        axios.post('https://myfastestpace-server.herokuapp.com/races/update/' + this.props.match.params.id, race)
             .then(res => console.log(res.data));
 
         // window.location = '/';
