@@ -29,7 +29,7 @@ export default class CreateRace extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8000/users')
+        axios.get('https://myfastestpace-server.herokuapp.com/users')
             .then(response => {
                 if (response.data.length > 0) {
                     this.setState({
@@ -104,7 +104,7 @@ export default class CreateRace extends Component {
 
         console.log(race);
         
-        axios.post('http://localhost:8000/races/add', race)
+        axios.post('https://myfastestpace-server.herokuapp.com/races/add', race)
             .then(res => console.log(res.data));
 
         window.location = '/';
