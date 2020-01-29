@@ -46,7 +46,7 @@ export default class RaceDataDisplay extends Component {
 
     componentDidMount() {
         //get list of exercises from database
-        axios.get('http://localhost:8000/races/')
+        axios.get('https://myfastestpace-server.herokuapp.com/races/')
             .then(response => {
                 this.setState({
                     races: response.data
@@ -58,7 +58,7 @@ export default class RaceDataDisplay extends Component {
     }
 
     deleteRace(id) {
-        axios.delete('http://localhost:5000/races/' + id)
+        axios.delete('https://myfastestpace-server.herokuapp.com/races/' + id)
             .then(response => console.log(response.data));
         
         // filter away the row from this id to hide it from the table
